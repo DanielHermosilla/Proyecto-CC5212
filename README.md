@@ -6,7 +6,7 @@ El proyecto tratará de buscar conexiones entre figuras influyentes y entidades 
 
 Dado que el cluster del servidor estaba siendo utilizado para otro proyecto, se estableció un servidor propio a través de una Raspberry Pi 5. Utilizando las herramientas de *"tunnel port fowarding"* se estableció una conexión SSH a las direcciones IP de los miembros respectivo del grupo. 
 
-Dado la capacidad del CPU, se modificó el tamaño de los baches y varios otros toques que se pueden encontrar en el archivo de configuración de Neo4J. En específico, para una CPU de 8gb se establecieron los siguientes parámetros; 
+Puesto la capacidad limitada del CPU, se modificó el tamaño de los baches y varios otros toques que se pueden encontrar en el archivo de configuración de Neo4J. En específico, para una CPU de 8gb se establecieron los siguientes parámetros; 
 
 ```bash
 #********************************************************************

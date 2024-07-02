@@ -48,42 +48,4 @@ db.transaction.timeout=60m
 
 Por el otro lado, se habilitó el puerto 7474 para poder utilizar la interfaz gráfica mediante el navegador web. 
 
-### Subida de datos 
-
-Dado el tamaño de los heaps, no era posible subir todos los nodos de una única transacción. Por lo mismo, se utilizó la función `CALL {} IN TRANSACTION OF 500 ROWS;` para cada CSV (encontrado en /opt/neo4j/imports) que contenía los nodos. Por el otro lado, aquellos archivos que contenían más de $10000$ entradas fueron divididos en archivos más pequeños para poder procesar las transacciones. Dado la gran cantidad de entradas, se realizó el siguiente script que automatizaba la subida de datos en el cypher-shell; 
-
-```bash
-#!/bin/bash
-NEO4J_BIN=/opt/neo4j/bin
-
-for file in /opt/neo4j/import/parte-*; do
-  echo "Loading $file"
-  $NEO4J_BIN/cypher-shell -u neo4j -p danielpatos "CALL {
-    LOAD CSV WITH HEADERS FROM 'file:///$file' AS row
-    CREATE (:Entity {
-      node_id: row.node_id,
-      name: row.name,
-      original_name: row.original_name,
-      former_name: row.former_name,
-      jurisdiction: row.jurisdiction,
-      jurisdiction_description: row.jurisdiction_description,
-      company_type: row.company_type,
-      address: row.address,
-      internal_id: row.internal_id,
-      incorporation_date: row.incorporation_date,
-      inactivation_date: row.inactivation_date,
-      struck_off_date: row.struck_off_date,
-      dorm_date: row.dorm_date,
-      status: row.status,
-      service_provider: row.service_provider,
-      ibcRUC: row.ibcRUC,
-      country_codes: row.country_codes,
-      countries: row.countries,
-      sourceID: row.sourceID,
-      valid_until: row.valid_until,
-      note: row.note
-    })
-  } IN TRANSACTIONS OF 500 ROWS;"
-done
-```
 

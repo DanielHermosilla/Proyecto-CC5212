@@ -1,5 +1,9 @@
 Muchas consultas eran recursivas y requerían de mucha iteraciones. Por el otro lado, el proceso de enlazamiento de datos para obtener la declaración de intereses de los candidatos debía ser automatizado. Por lo mismo, se realizaron diversos ejecutables para correr dentro del servidor (y, en su defecto, dentro de la *cypher-shell*), como también otros programas para poder *"scrapear"* y entrelazar datos. 
 
+## Limpiar los datos
+
+Algunos archivos que tenían los datos para cada nodo venían mal formateados. Habían errores con las commas y comillas doble. Por lo mismo, también se generó un archivo python para limpiar tales errores. 
+
 ## Creación de los nodos y relaciones 
 
 Dado el tamaño de los heaps, no era posible subir todos los nodos de una única transacción. Por lo mismo, se utilizó la función `CALL {} IN TRANSACTION OF 500 ROWS;` para cada CSV (encontrado en /opt/neo4j/imports) que contenía los nodos. Por el otro lado, aquellos archivos que contenían más de $10000$ entradas fueron divididos en archivos más pequeños para poder procesar las transacciones. Dado la gran cantidad de entradas, se realizó el siguiente script que automatizaba la subida de datos en el cypher-shell; 
@@ -47,3 +51,4 @@ Los datos asociados a los postulantes por las distintas alcaldías se obtuvieron
 Para poder obtener un archivo conciso con la información de las acciones de cada candidato, se utilizó la librería `BeautifulSoup` de Python. Cada persona tenía un sitio web asociado, que a su vez, tenía un JSON con todo el patrimonio e información relevante. Por lo mismo, mediante un filtro de los elementos HTML y la utilización de regex se pudo extraer los documentos JSON asociados a cada entidad. 
 
 Por consecuencia, se creó una base de datos MongoDB para poder hacer consultas dentro de cada JSON. En específico, se quería extraer el atributo de las acciones de cada persona. Por lo mismo, mediante la API que ofrece `pymongo`, se hizo una conexión a la consola de MongoDB para poder ejecutar distintas queries de forma iterada. Notar que existían muchos casos donde los aspirantes a alcaldes no tenían ninguna acción declarada. Por lo mismo, se verificó su existencia antes de realizar las respectivas consultas. Por último, las proyecciones se llevaron a un csv con los datos *"normalizados"*, vale decir, por cada aparición de una empresa de algún candidato, se añadía una fila, dando la posibilidad de repetir los nombres. 
+

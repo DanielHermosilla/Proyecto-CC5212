@@ -2,7 +2,7 @@ Muchas consultas eran recursivas y requerían de mucha iteraciones. Por el otro 
 
 ## Limpieza los datos
 
-Algunos archivos que tenían los datos para cada nodo venían mal formateados. Habían errores con las commas y comillas doble. Por lo mismo, también se generó un archivo python para limpiar tales errores bajo el archivo `limpiar.py`
+Algunos archivos que tenían los datos para cada nodo venían mal formateados. Habían errores con las commas y comillas doble. Por lo mismo, también se generó un archivo python para limpiar tales errores bajo el archivo `limpiarDatos.py`
 
 Por el otro lado, también nos encontramos con unos pocos nodos $(\approx 10^3)$ que estaban repetidos y hacían que se generen choques entre "IDs". Además, algunas relaciones también hacían alusión a "ID's" que no existían. Esto fue arreglado bajo con Pandas en el archivo `limpiarRepetidos.py` 
 

@@ -1,8 +1,10 @@
 Muchas consultas eran recursivas y requerían de mucha iteraciones. Por el otro lado, el proceso de enlazamiento de datos para obtener la declaración de intereses de los candidatos debía ser automatizado. Por lo mismo, se realizaron diversos ejecutables para correr dentro del servidor (y, en su defecto, dentro de la *cypher-shell*), como también otros programas para poder *"scrapear"* y entrelazar datos. 
 
-## Limpiar los datos
+## Limpieza los datos
 
-Algunos archivos que tenían los datos para cada nodo venían mal formateados. Habían errores con las commas y comillas doble. Por lo mismo, también se generó un archivo python para limpiar tales errores. 
+Algunos archivos que tenían los datos para cada nodo venían mal formateados. Habían errores con las commas y comillas doble. Por lo mismo, también se generó un archivo python para limpiar tales errores bajo el archivo `limpiar.py`
+
+Por el otro lado, también nos encontramos con unos pocos nodos $(\approx 10^3)$ que estaban repetidos y hacían que se generen choques entre "IDs". Además, algunas relaciones también hacían alusión a "ID's" que no existían. Esto fue arreglado bajo con Pandas en el archivo `limpiarRepetidos.py` 
 
 ## Creación de los nodos y relaciones 
 
